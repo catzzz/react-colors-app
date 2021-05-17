@@ -4,7 +4,7 @@ import './Palette.css';
 import ColorBox from "./ColorBox";
 
 import Navbar from './Navbar';
-
+import PaletteFooter from './PaletteFooter';
 
 
 
@@ -30,7 +30,7 @@ class Palette extends Component {
             <ColorBox 
                 background={color[format]} 
                 name={color.name} 
-                key={color.id} 
+                key={color.name} 
                 // id={color.id} 
                 // paletteId = {id}
                 moreUrl={`/palette/${id}/${color.id}`}
@@ -44,17 +44,15 @@ class Palette extends Component {
                     level={level} 
                     changeLevel={this.changeLevel} 
                     handleChange= {this.changeFormat}
+                    showingAllColors = {true}
                 />
                 
 
                 <div className="Palette-colors">
                     {colorBoxes}
                 </div>
-                <footer className="Palette-footer">
-                    {paletteName}
-                    <span className="emoji">{emoji}</span>
-                </footer>
                 
+                <PaletteFooter paletteName = {paletteName} emoji ={emoji}/>
             </div>
         )
     }

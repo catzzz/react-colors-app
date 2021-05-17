@@ -4,7 +4,8 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import Snackbar from "@material-ui/core/Snackbar";
 import CloseIcon from "@material-ui/icons/Close";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import PaletteFotter from './PaletteFooter';
 
 import IconButton from "@material-ui/core/IconButton";
 
@@ -28,25 +29,28 @@ class Navbar extends Component {
     this.setState({ open: false });
   }
   render() {
-    const { level, changeLevel } = this.props;
+    const { level, changeLevel, showingAllColors } = this.props;
     const { format } = this.state;
     return (
       <header className="Navbar">
         <div className="logo">
           <Link to="/">reactcolorpicker</Link>
         </div>
-        <div className="slider-container">
-          <span>Level: {level} </span>
-          <div className="slider">
-            <Slider
-              defaultValue={level}
-              min={100}
-              max={900}
-              step={100}
-              onAfterChange={changeLevel}
-            />
+        {showingAllColors && (
+          <div className="slider-container">
+            <span>Level: {level} </span>
+            <div className="slider">
+              <Slider
+                defaultValue={level}
+                min={100}
+                max={900}
+                step={100}
+                onAfterChange={changeLevel}
+              />
+            </div>
           </div>
-        </div>
+        )}
+
         <div className="select-container">
           <Select value={format} onChange={this.handleFormatChange}>
             <MenuItem value="hex">HEX - #fffff</MenuItem>
@@ -58,7 +62,11 @@ class Navbar extends Component {
           anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
           open={this.state.open}
           atuoHideDuration={3000}
-          message={<span id="message-id">Format Change to: {format.toUpperCase()} </span>}
+          message={
+            <span id="message-id">
+              Format Change to: {format.toUpperCase()}{" "}
+            </span>
+          }
           ContentProps={{ "aria-describedby": "message-id" }}
           onClose={this.closeSnackbar}
           action={[
@@ -72,6 +80,7 @@ class Navbar extends Component {
             </IconButton>,
           ]}
         />
+        
       </header>
     );
   }
