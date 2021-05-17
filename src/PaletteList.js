@@ -6,10 +6,11 @@ import { withStyles } from "@material-ui/styles";
 const styles = {
   root: {
     backgroundColor: "blue",
-    height:"100%",
+    height:"100vh",
     display:"flex",
     alignItems:"flex-start",
     justifyContent:"center"
+    
   },
   container:{
     with:"50%",
@@ -17,16 +18,19 @@ const styles = {
     alignItems:"flex-start",
     flexDirection:"column",
     flexWrap:"wrap",
-    border:"1px solid white"
+    // border:"1px solid white"
 
   },
   nav:{
+    // backgroundColor:"pink",
     display:"flex",
     width:"100%",
     justifyContent:"space-between",
     color:"white"
+
   },
   palettes:{
+    //backgroundColor:"green",
     boxSizing:"border-box",
     width:"100%",
     display:"grid",
