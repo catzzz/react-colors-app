@@ -26,6 +26,7 @@ class App extends Component {
             />
           )}
         />
+        <Route exact path="/palette/:paletteId/:colorId" render={ () => (<h1> Signle </h1>)}/>
       </Switch>
 
       // <div className="App">
