@@ -1,26 +1,22 @@
 import React, { Component } from 'react'
 import {withStyles} from '@material-ui/styles';
 const styles = {
-    root:{
-        width: "20%",
-        height: "25%",
-        margin: "0 auto",
-        position: "relative",
-        display: "inline-block",
-        cursor: "pointer",
-        marginBottom: "-3.5px",
-        "&:hover button": {
-          opacity: "1",
-        },
+    root: {
+      width: "20%",
+      height: "25%",
+      margin: "0 auto",
+      display: "inline-block",
+      position: "relative",
+      cursor: "pointer",
+      marginBottom: "-3.5px"
     }
-}
-
+  };
 class DragableColorBox extends Component {
     render() {
         const {classes} = this.props
         return (
             <div className= {classes.root} style={{backgroundColor:this.props.color}}>
-                {this.props.color}
+                {this.props.name}
             </div>
         )
     }
