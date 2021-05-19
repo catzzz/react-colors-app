@@ -1,14 +1,22 @@
 import sizes from "./sizes";
+import bg from "./bg.svg";
 
  const styles = {
     root: {
-      backgroundColor: "blue",
+
       height:"100vh",
       display:"flex",
       alignItems:"flex-start",
-      justifyContent:"center"
+      justifyContent:"center",
+      /* background by SVGBackgrounds.com */
+      backgroundColor: "#394bad",
+      backgroundImage: `url(${bg})`,
+      overflow: "scroll"
       
     },
+    heading: {
+        fontSize: "2rem"
+      },
     container:{
       with:"60%",
       display:"flex",
@@ -48,6 +56,7 @@ import sizes from "./sizes";
         gridTemplateColumns:"repeat(2,50%)",
     },
       [sizes.down("xs")]:{
+        gridGap: "1.4rem",
         gridTemplateColumns:"repeat(1,100%)",
     },
     
