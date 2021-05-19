@@ -15,36 +15,49 @@ import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 
 import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
-import PaletteMetaForm from './PaletteMetaForm';
-
+import PaletteMetaForm from "./PaletteMetaForm";
 
 const drawerWidth = 400;
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
-    display: "flex"
+    display: "flex",
   },
   appBar: {
     transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
+      duration: theme.transitions.duration.leavingScreen,
     }),
     flexDirection: "row",
     justifyContent: "space-between",
-    height: "64px"
+    alignItems:"center",
+    height: "64px",
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: drawerWidth,
     transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen
-    })
+      duration: theme.transitions.duration.enteringScreen,
+    }),
   },
   menuButton: {
     marginLeft: 12,
-    marginRight: 20
+    marginRight: 20,
   },
-  navBtns: {}
+  navBtns: {
+    marginRight: "1rem",
+    "& a":{
+        textDecoration:"none"
+    }
+  },
+
+  button: {
+    margin: "0 0.5rem",
+
+  },
+  link:{
+      textDecoration:"none"
+  }
 });
 
 class PaletteFormNav extends Component {
@@ -52,14 +65,17 @@ class PaletteFormNav extends Component {
     super(props);
     this.state = {
       newPaletteName: "",
+      formShowing: false,
     };
-   
+    this.showForm = this.showForm.bind(this);
+  }
+  showForm() {
+    this.setState({ formShowing: true });
   }
 
-
   render() {
-    const { classes, open, palettes ,handleSubmit} = this.props;
-  
+    const { classes, open, palettes, handleSubmit } = this.props;
+
     return (
       <div className={classes.root}>
         <CssBaseline />
@@ -82,18 +98,30 @@ class PaletteFormNav extends Component {
             <Typography variant="h6" color="inherit" noWrap>
               Create A Palette
             </Typography>
-            
           </Toolbar>
-          <div className={classes.navBtn}>
-              
-              <PaletteMetaForm palettes = {palettes} handleSubmit = {handleSubmit}/>
-              <Link to="/">
-                  <Button variant="contained" color="secondary">
-                    Go Back
-                  </Button>
-                </Link>
-            </div>
+          <div className={classes.navBtns}>
+            <Link to="/">
+              <Button
+                variant="contained"
+                color="secondary"
+                className={classes.button}
+              >
+                Go Back
+              </Button>
+            </Link>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={this.showForm}
+              className={classes.button}
+            >
+              Save
+            </Button>
+          </div>
         </AppBar>
+        {this.state.formShowing && (
+          <PaletteMetaForm palettes={palettes} handleSubmit={handleSubmit} />
+        )}
       </div>
     );
   }
