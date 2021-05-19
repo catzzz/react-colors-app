@@ -10,78 +10,18 @@ import IconButton from "@material-ui/core/IconButton";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import Button from "@material-ui/core/Button";
 
-import DragableColorList from './DragableColorList'
+import DragableColorList from "./DragableColorList";
 import { SortableContainer } from "react-sortable-hoc";
 import { arrayMove } from "react-sortable-hoc";
 
-import PaletteFormNav from './PaletteFormNav';
-import ColorPickerForm from './ColorPickerForm';
-
-const drawerWidth = 400;
-
-const styles = (theme) => ({
-  root: {
-    display: "flex",
-  },
-  
-  hide: {
-    display: "none",
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-    height: "100vh"
-  },
-  drawerPaper: {
-    width: drawerWidth,
-    display: "flex",
-    alignItems: "center"
-  },
-  drawerHeader: {
-    display: "flex",
-    alignItems: "center",
-    padding: "0 8px",
-    ...theme.mixins.toolbar,
-    justifyContent: "flex-end",
-  },
-  content: {
-    flexGrow: 1,
-    height: "calc(100vh - 64px)",
-    padding: theme.spacing(3),
-    transition: theme.transitions.create("margin", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    marginLeft: -drawerWidth,
-  },
-  contentShift: {
-    transition: theme.transitions.create("margin", {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    marginLeft: 0,
-  },
-  container: {
-    width: "90%",
-    height: "100%",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center"
-  },
-  buttons: {
-    width: "100%"
-  },
-  button: {
-    width: "50%"
-  }
-
-});
+import PaletteFormNav from "./PaletteFormNav";
+import ColorPickerForm from "./ColorPickerForm";
+import styles from "./styles/NewPaletteFormStyles";
 
 class NewPaletteForm extends Component {
-  static defaultProps ={
-      maxColor:20
-  }
+  static defaultProps = {
+    maxColor: 20,
+  };
   constructor(props) {
     super(props);
     this.state = {
@@ -89,9 +29,8 @@ class NewPaletteForm extends Component {
       currentColor: "teal",
       colors: this.props.palettes[0].colors,
       newColorName: "",
-      
     };
-    // 
+    //
     this.addNewColor = this.addNewColor.bind(this);
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -99,8 +38,6 @@ class NewPaletteForm extends Component {
     this.clearColors = this.clearColors.bind(this);
     this.addRandomColor = this.addRandomColor.bind(this);
   }
-
-
 
   handleDrawerOpen = () => {
     this.setState({ open: true });
@@ -110,9 +47,7 @@ class NewPaletteForm extends Component {
     this.setState({ open: false });
   };
 
-
   addNewColor(newColor) {
-
     this.setState({
       colors: [...this.state.colors, newColor],
       newColorName: "",
@@ -132,40 +67,38 @@ class NewPaletteForm extends Component {
     });
   }
 
-  onSortEnd = ({oldIndex, newIndex}) => {
-    this.setState(({colors}) => ({
-        colors: arrayMove(colors, oldIndex, newIndex),
+  onSortEnd = ({ oldIndex, newIndex }) => {
+    this.setState(({ colors }) => ({
+      colors: arrayMove(colors, oldIndex, newIndex),
     }));
   };
 
-  clearColors(){
-    this.setState({colors:[]});
+  clearColors() {
+    this.setState({ colors: [] });
   }
-  addRandomColor(){
-      // Pick random from exist palette
-      const allColors = this.props.palettes.map(p=>p.colors).flat();
-      var rand = Math.floor(Math.random()*allColors.length);
-      const randomColor = allColors[rand]
-      this.setState({
-          colors:[...this.state.colors, randomColor]
-      })
+  addRandomColor() {
+    // Pick random from exist palette
+    const allColors = this.props.palettes.map((p) => p.colors).flat();
+    var rand = Math.floor(Math.random() * allColors.length);
+    const randomColor = allColors[rand];
+    this.setState({
+      colors: [...this.state.colors, randomColor],
+    });
   }
   render() {
-   
-    const { classes ,maxColor,palettes} = this.props;
-    const { open ,colors} = this.state;
+    const { classes, maxColor, palettes } = this.props;
+    const { open, colors } = this.state;
     const paletteIsFull = colors.length >= maxColor;
 
     return (
       <div className={classes.root}>
-        <PaletteFormNav 
-            //classes ={classes} 
-            open = {open} 
-            palettes = {palettes} 
-            handleSubmit = {this.handleSubmit} 
-            handleDrawerOpen = {this.handleDrawerOpen}
-            
-            />
+        <PaletteFormNav
+          //classes ={classes}
+          open={open}
+          palettes={palettes}
+          handleSubmit={this.handleSubmit}
+          handleDrawerOpen={this.handleDrawerOpen}
+        />
         <Drawer
           className={classes.drawer}
           variant="persistent"
@@ -182,21 +115,30 @@ class NewPaletteForm extends Component {
           </div>
           <Divider />
           <div className={classes.container}>
-          <Typography variant="h4">Design Your Palette</Typography>
-          <div className={classes.buttons}>
-            <Button className={classes.button} variant="contained" color="secondary" onClick = {this.clearColors}>
-              Clear Palette
-            </Button>
-            <Button className={classes.button} variant="contained" color="primary" onClick = {this.addRandomColor}>
-              Random Color
-            </Button>
-          </div>
-
-          <ColorPickerForm
-            paletteIsFull={paletteIsFull}
-            addNewColor={this.addNewColor}
-            colors={colors}
-          />
+            <Typography variant="h4">Design Your Palette</Typography>
+            <div className={classes.buttons}>
+              <Button
+                className={classes.button}
+                variant="contained"
+                color="secondary"
+                onClick={this.clearColors}
+              >
+                Clear Palette
+              </Button>
+              <Button
+                className={classes.button}
+                variant="contained"
+                color="primary"
+                onClick={this.addRandomColor}
+              >
+                Random Color
+              </Button>
+              <ColorPickerForm
+                paletteIsFull={paletteIsFull}
+                addNewColor={this.addNewColor}
+                colors={colors}
+              />
+            </div>
           </div>
         </Drawer>
         <main
@@ -204,10 +146,14 @@ class NewPaletteForm extends Component {
             [classes.contentShift]: open,
           })}
         >
-          <div className={classes.drawerHeader}  />
+          <div className={classes.drawerHeader} />
 
-            <DragableColorList colors = {colors} removeColor ={this.removeColor}  axis="xy" onSortEnd = {this.onSortEnd}/>
-
+          <DragableColorList
+            colors={colors}
+            removeColor={this.removeColor}
+            axis="xy"
+            onSortEnd={this.onSortEnd}
+          />
         </main>
       </div>
     );

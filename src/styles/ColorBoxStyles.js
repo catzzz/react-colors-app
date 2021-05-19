@@ -1,6 +1,6 @@
 import chroma from "chroma-js";
 
-export default {
+const styles =  {
     colorBox: {
       width: "20%",
       height: (props) => (props.showingFullPalette ? "25%" : "50%"),
@@ -13,8 +13,6 @@ export default {
         opacity: "1",
       },
     },
-  
-  
   
     copyText: {
       color: (props) =>
@@ -124,3 +122,4 @@ export default {
   
   };
   
+  export default styles;

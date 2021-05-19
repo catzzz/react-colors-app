@@ -1,5 +1,6 @@
 
-export default {
+
+ const styles = {
     root: {
       backgroundColor: "blue",
       height:"100vh",
@@ -40,3 +41,5 @@ export default {
     }
   
   };
+
+  export default styles;
