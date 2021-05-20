@@ -6,7 +6,7 @@ import styles from './styles/DragableColorBoxStyles';
 
 class DragableColorBox extends Component {
     render() {
-        const {classes,handleClick, } = this.props
+        const {classes,handleClick, } = this.propsnpm
         return (
             <div className= {classes.root} style={{backgroundColor:this.props.color}}>
                 <div className={classes.boxContent}>
