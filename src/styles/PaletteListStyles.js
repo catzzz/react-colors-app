@@ -1,6 +1,6 @@
 import sizes from "./sizes";
 import bg from "./bg.svg";
-import transitions from "@material-ui/core/styles/transitions";
+
 
 const styles = {
   "@global": {
@@ -47,7 +47,7 @@ const styles = {
     justifyContent: "space-between",
     color: "white",
     alignItems: "center",
-    color: "white",
+ 
     "& a": {
       color: "white",
     },
